@@ -6,11 +6,12 @@
 #include <fstream>
 /* Internal headers */
 #include "io/io.hpp"
-#include "market_messages/containers.hpp"
-#include "recorders/recorder_interface.hpp"
+#include "messages/MessageFactory.hpp"
+#include "recorder/RecorderManager.hpp"
+// #include "recorder/recorder_interface.hpp"
 
 
-/* Read market data from binary files:
+/* Read market data from file:
 - Stream from file with ifstream
 - Cast market data messages into internal data formats (contained in messages/containers.hpp)
 - Map LMAX codes to currency pairs
@@ -19,13 +20,15 @@
 
 class MarketDataReader {
 private:
+  MessageFactory* m_factory;
+
+  RecorderManager* recorder_;
+
+  unsigned int bytes_read_;
+
   std::string market_data_file_path_;
 
   std::ifstream in_file_;
-
-  RecorderInterface* recorder_;
-
-  unsigned int bytes_read_;
 
 public:
   MarketDataReader();
@@ -34,15 +37,12 @@ public:
 
   ~MarketDataReader();
 
-  unsigned int get_file_size();
-
-  void set_input_file(std::string input_file);
-
-  void set_recorder(RecorderInterface* recorder);
+  void set_recorder(RecorderManager* recorder);
 
   void read_file_to_recorder();
 
-
+  unsigned int get_file_size();
+  unsigned int get_remaining_size();
 };
 
 

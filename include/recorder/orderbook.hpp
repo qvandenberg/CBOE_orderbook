@@ -4,7 +4,7 @@
 /* Standard library headers */
 
 /* Internal headers */
-#include "recorders/recorder_interface.hpp"
+#include "recorder/recorder_interface.hpp"
 #include "market_messages/containers.hpp"
 
 class Orderbook : public RecorderInterface {

@@ -8,19 +8,20 @@
 #include <inttypes.h>
 
 /* Internal headers */
-#include "market_messages/containers.hpp"
-#include "io/binary_reader.hpp"
+#include "io/MarketDataReader.hpp"
 
 
 int main(int argc, char* argv[]) {
-  std::string fileName = "./data/binary/itch-daily-2020-11-22_ldprof.itch"; // Binary file name
+  std::string fileName = "./data/pitch_example_data"; // Binary file name
 
-  BinaryReader * reader = new BinaryReader(fileName);
-  printf("File size %ul\n", reader->get_file_size());
+  MarketDataReader * reader = new MarketDataReader(fileName);
+  printf("File size %ul bytes\n", reader->get_file_size());
   reader->read_file_to_recorder();
 
   /* Delete objects */
   delete reader;
+
+  printf("Read in %ul of %ul bytes (%d \%)\n", reader->get_file_size()-reader->get_remaining_size(), reader->get_file_size(), (reader->get_file_size()-reader->get_remaining_size()) /reader->get_file_size());
 
   return 0;
 }
