@@ -31,8 +31,6 @@ private:
   std::ifstream in_file_;
 
 public:
-  MarketDataReader();
-
   MarketDataReader(std::string file_path);
 
   ~MarketDataReader();

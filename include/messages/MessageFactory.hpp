@@ -5,6 +5,7 @@
 #include <inttypes.h>
 #include <stdint.h>
 #include <string>
+#include <memory>
 
 /* Internal headers */
 #include "messages/Message.hpp"
@@ -20,7 +21,7 @@ class MessageFactory {
   ~MessageFactory() = default;
 
 public:
-  Message* get_message_container(std::string message_type);
+  std::shared_ptr<Message> get_message_container(std::string message_type);
 };
 
 

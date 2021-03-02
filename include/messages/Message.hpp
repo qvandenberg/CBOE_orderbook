@@ -7,19 +7,20 @@
 #include <string>
 
 /* Internal headers */
-// #include "market_messages/container_interface.hpp"
-
+#include "recorder/RecorderManager.hpp"
 
 
 class Message {
 public:
-  virtual ~Message(){}
+  Message() {}
+  virtual ~Message() {}
 
   virtual void add_attributes(std::string message_attributes) = 0;
+  virtual void pass_to_recorder(RecorderManager* rm) = 0;
 };
 
 
-class OrderAdd : public Message { // MessageType: 0x414F, total of 52 bytes
+struct OrderAdd : public Message { // MessageType: 0x414F, total of 52 bytes
   /* Timestamp offset (ms since midnight), length 8  */
   int timestamp_offset;
   /* CBOE-assigned order ID, length 12 */
@@ -41,6 +42,7 @@ public:
   ~OrderAdd() = default;
 
   void add_attributes(std::string line);
+  void pass_to_recorder(RecorderManager* rm);
 };
 
 
@@ -57,8 +59,27 @@ public:
   ~OrderCancel() = default;
 
   void add_attributes(std::string line);
+  void pass_to_recorder(RecorderManager* rm);
 };
 
+struct OrderExecuted : public Message {
+  /* Timestamp offset (ms since midnight), length 8  */
+  int timestamp_offset;
+  /* CBOE-assigned order ID, length 12 */
+  std::string order_ID;
+  /* CBOE-assigned execution ID, length 12 */
+  std::string execution_ID;
+  /* order quantity, length 6  */
+  unsigned int execution_quantity;
+
+public:
+  OrderExecuted() = default;
+
+  ~OrderExecuted() = default;
+
+  void add_attributes(std::string line);
+  void pass_to_recorder(RecorderManager* rm);
+};
 
 struct Trade : public Message {
   /* Timestamp offset (ms since midnight), length 8  */
@@ -84,25 +105,7 @@ public:
   ~Trade() = default;
 
   void add_attributes(std::string update_attributes);
-};
-
-
-struct OrderExecuted : public Message {
-  /* Timestamp offset (ms since midnight), length 8  */
-  int timestamp_offset;
-  /* CBOE-assigned order ID, length 12 */
-  std::string order_ID;
-  /* CBOE-assigned execution ID, length 12 */
-  std::string execution_ID;
-  /* order quantity, length 6  */
-  unsigned int execution_quantity;
-
-public:
-  OrderExecuted() = default;
-
-  ~OrderExecuted() = default;
-
-  void add_attributes(std::string line);
+  void pass_to_recorder(RecorderManager* rm);
 };
 
 

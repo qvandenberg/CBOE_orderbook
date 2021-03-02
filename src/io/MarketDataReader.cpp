@@ -4,6 +4,7 @@
 #include <fstream>
 #include <memory>
 #include <iostream>
+#include <memory>
 
 /* Internal headers */
 #include "io/io.hpp"
@@ -18,7 +19,6 @@ MarketDataReader::MarketDataReader(std::string file_path) : market_data_file_pat
 }
 
 MarketDataReader::~MarketDataReader(){
-  // log
   in_file_.close();
 }
 
@@ -52,10 +52,9 @@ void MarketDataReader::read_file_to_recorder(){
   while (std::getline(in_file_, line)) {
     bytes_read_ += line.length();
     message_type = line.substr(9,1);
-    Message * message = m_factory->get_message_container(message_type);
+    std::shared_ptr<Message> message = m_factory->get_message_container(message_type);
     message->add_attributes(line);
-    
-
+    message->pass_to_recorder(recorder_);
   }
   in_file_.close();
 }

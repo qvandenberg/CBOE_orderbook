@@ -7,8 +7,12 @@
 
 /* Internal headers */
 #include "messages/Message.hpp"
+#include "recorder/InstrumentRecorder.hpp"
 #include "io/Output.hpp"
 // #include "io/writer.hpp"
+
+// forward declaration
+struct Trade;
 
 /*
 Interface for recorder objects:
@@ -22,17 +26,22 @@ Reader object.
 */
 class RecorderManager {
 private:
+  std::map<std::string, std::shared_ptr<InstrumentRecorder> > instrument_recorders; // instrument, Order*
+  std::map<std::string, std::string > id_to_instrument; // order id, instrument
 
 public:
-  RecorderManager();
-  ~RecorderManager();
+  RecorderManager() = default;
+  ~RecorderManager() = default;
 
-  void set_output_sink(Output*  writer);
+  void receive_update(OrderAdd*);
+  void receive_update(OrderExecuted* );
+  void receive_update(OrderCancel*);
+  void receive_update(Trade* );
 
-  void receive_market_update(OrderAdd order_add);
-  void receive_market_update(OrderCancel order_cancel);
-  void receive_market_update(OrderExecuted order_executed);
-  void receive_market_update(Trade trade);
+  // RecorderManager& operator+=(const OrderAdd* add);
+  // RecorderManager& operator+=(const OrderExecuted* executed);
+  // RecorderManager& operator+=(const OrderCancel* cancel);
+  // RecorderManager& operator+=(const Trade* trade);
 
 };
 
