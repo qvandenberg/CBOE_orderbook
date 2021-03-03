@@ -5,7 +5,7 @@
 #include <string>
 #include <fstream>
 /* Internal headers */
-#include "io/io.hpp"
+// #include "io/io.hpp"
 #include "messages/MessageFactory.hpp"
 #include "recorder/RecorderManager.hpp"
 // #include "recorder/recorder_interface.hpp"

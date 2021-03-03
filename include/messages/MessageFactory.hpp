@@ -17,11 +17,10 @@
 Generate empty container of appropriate type based on message type input
 */
 class MessageFactory {
+public:
   MessageFactory() = default;
   ~MessageFactory() = default;
-
-public:
-  std::shared_ptr<Message> get_message_container(std::string message_type);
+  std::unique_ptr<Message> get_message_container(std::string message_type);
 };
 
 

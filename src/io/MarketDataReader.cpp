@@ -7,7 +7,7 @@
 #include <memory>
 
 /* Internal headers */
-#include "io/io.hpp"
+// #include "io/io.hpp"
 #include "io/MarketDataReader.hpp"
 #include "recorder/RecorderManager.hpp"
 // #include "recorder/recorder_interface.hpp"
@@ -16,10 +16,15 @@
 
 MarketDataReader::MarketDataReader(std::string file_path) : market_data_file_path_(file_path) {
   bytes_read_ = 0;
+  m_factory = new MessageFactory();
+  recorder_ = new RecorderManager();
 }
 
 MarketDataReader::~MarketDataReader(){
+  printf("Delete MarketDataReader\n");
   in_file_.close();
+  delete m_factory;
+  delete recorder_;
 }
 
 unsigned int MarketDataReader::get_file_size(){
@@ -52,7 +57,7 @@ void MarketDataReader::read_file_to_recorder(){
   while (std::getline(in_file_, line)) {
     bytes_read_ += line.length();
     message_type = line.substr(9,1);
-    std::shared_ptr<Message> message = m_factory->get_message_container(message_type);
+    std::unique_ptr<Message> message = m_factory->get_message_container(message_type);
     message->add_attributes(line);
     message->pass_to_recorder(recorder_);
   }

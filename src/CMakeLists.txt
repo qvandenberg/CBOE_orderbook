@@ -7,7 +7,6 @@ add_library(cboe_reader STATIC "")
 add_subdirectory(io)
 add_subdirectory(recorder)
 add_subdirectory(messages)
-add_subdirectory(util)
 
 # Include header directory for files in /src
 target_include_directories(cboe_reader PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/../include)

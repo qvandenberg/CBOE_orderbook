@@ -1,5 +1,5 @@
-#ifndef RECORDERS_MANAGER_H
-#define RECORDERS_MANAGER_H
+#ifndef RECORDER_MANAGER_H
+#define RECORDER_MANAGER_H
 
 /* Standard library headers */
 #include <string>
@@ -26,22 +26,17 @@ Reader object.
 */
 class RecorderManager {
 private:
-  std::map<std::string, std::shared_ptr<InstrumentRecorder> > instrument_recorders; // instrument, Order*
+  std::map<std::string, std::unique_ptr<InstrumentRecorder> > instrument_recorders; // instrument, InstrumentRecorder*
   std::map<std::string, std::string > id_to_instrument; // order id, instrument
 
 public:
-  RecorderManager() = default;
-  ~RecorderManager() = default;
+  RecorderManager(){}
+  ~RecorderManager();
 
-  void receive_update(OrderAdd*);
-  void receive_update(OrderExecuted* );
-  void receive_update(OrderCancel*);
-  void receive_update(Trade* );
-
-  // RecorderManager& operator+=(const OrderAdd* add);
-  // RecorderManager& operator+=(const OrderExecuted* executed);
-  // RecorderManager& operator+=(const OrderCancel* cancel);
-  // RecorderManager& operator+=(const Trade* trade);
+  void receive_update(OrderAdd&);
+  void receive_update(OrderExecuted& );
+  void receive_update(OrderCancel&);
+  void receive_update(Trade&);
 
 };
 

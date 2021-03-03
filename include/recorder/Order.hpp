@@ -19,13 +19,12 @@ private:
   // more attributes can be added to compute prices or other quantities
 
 public:
-  Order(OrderAdd*);
-  ~Order() = default;
+  Order(OrderAdd&);
+  ~Order(){}
 
-  unsigned int add_order_mutation(OrderExecuted*);
-  unsigned int add_order_mutation(OrderCancel*);
-
-};
+  // existence flag: false if order quantity is now zero, true if nonzero
+  bool add_order_mutation(OrderExecuted&);
+  bool add_order_mutation(OrderCancel&); };
 
 
 #endif

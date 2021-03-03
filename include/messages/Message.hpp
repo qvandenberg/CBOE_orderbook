@@ -14,9 +14,8 @@ class Message {
 public:
   Message() {}
   virtual ~Message() {}
-
-  virtual void add_attributes(std::string message_attributes) = 0;
-  virtual void pass_to_recorder(RecorderManager* rm) = 0;
+  virtual void add_attributes(std::string) = 0;
+  virtual void pass_to_recorder(RecorderManager*) = 0;
 };
 
 
@@ -37,12 +36,11 @@ struct OrderAdd : public Message { // MessageType: 0x414F, total of 52 bytes
   bool YN;
 
 public:
-  OrderAdd() = default;
-
-  ~OrderAdd() = default;
-
-  void add_attributes(std::string line);
-  void pass_to_recorder(RecorderManager* rm);
+  OrderAdd(){}
+  OrderAdd(std::string line);
+  ~OrderAdd(){}
+  void pass_to_recorder(RecorderManager*) override;
+  void add_attributes(std::string) override;
 };
 
 
@@ -53,13 +51,13 @@ struct OrderCancel : public Message {
   std::string order_ID;
   /* order quantity, length 6  */
   int cancel_quantity;
+
 public:
-  OrderCancel() = default;
-
-  ~OrderCancel() = default;
-
-  void add_attributes(std::string line);
-  void pass_to_recorder(RecorderManager* rm);
+  OrderCancel(){}
+  OrderCancel(std::string line);
+  ~OrderCancel(){}
+  void pass_to_recorder(RecorderManager*) override;
+  void add_attributes(std::string) override;
 };
 
 struct OrderExecuted : public Message {
@@ -70,15 +68,14 @@ struct OrderExecuted : public Message {
   /* CBOE-assigned execution ID, length 12 */
   std::string execution_ID;
   /* order quantity, length 6  */
-  unsigned int execution_quantity;
+  int execution_quantity;
 
 public:
-  OrderExecuted() = default;
-
-  ~OrderExecuted() = default;
-
-  void add_attributes(std::string line);
-  void pass_to_recorder(RecorderManager* rm);
+  OrderExecuted(){}
+  OrderExecuted(std::string line);
+  ~OrderExecuted(){}
+  void pass_to_recorder(RecorderManager*) override;
+  void add_attributes(std::string) override;
 };
 
 struct Trade : public Message {
@@ -91,7 +88,7 @@ struct Trade : public Message {
   /* buy/sell flag, ('B': buy, 'S' : sell), length 1  */
   std::string side;
   /* order quantity, length 6  */
-  unsigned int order_quantity;
+  int order_quantity;
   /* Limit price, lenth 6  */
   std::string instrument;
   /* limit price, length 10 (represents 10^4 * price ) */
@@ -100,16 +97,12 @@ struct Trade : public Message {
   bool YN;
 
 public:
-  Trade() = default;
-
-  ~Trade() = default;
-
-  void add_attributes(std::string update_attributes);
-  void pass_to_recorder(RecorderManager* rm);
+  Trade(){}
+  Trade(std::string line);
+  ~Trade(){}
+  void pass_to_recorder(RecorderManager*) override;
+  void add_attributes(std::string) override;
 };
-
-
-
 
 
 
