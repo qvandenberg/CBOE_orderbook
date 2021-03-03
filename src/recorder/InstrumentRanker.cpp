@@ -40,6 +40,6 @@ void InstrumentRanker::print_top_stocks(int num_instruments){
       if (i < num_instruments){
         printf("%s\t%d\n", pq.top().first.c_str(), pq.top().second);
       }
-      pq.pop(); // pop entire queue because it lacks a destructor
+      pq.pop(); // pop entire queue because priority queues lacks a destructor
     }
 }

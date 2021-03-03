@@ -6,30 +6,27 @@ Directory structure:
 
 `\applications - main programs`
 `\build/bin - executables`
-`\src - implementation (.cpp) and header (.hpp) files`
-`\test - testing scripts`
+`\src - implementation (.cpp) files
+`\include` - header (.hpp) files`
 
 ## Compilation procedure
-Manually, follow below steps. (put this in .sh file)
-Create and navigate to the root build folder:
+Modify the build.sh file to add the appropriate CMake generator. I chose "Unix Makefiles" as I work on OS X. On a Linux system, it is most likely "Ninja".
 
-`mkdir build; cd build`
-
-Execute cmake commands:
-
-`cmake .. -G <Generator>`
-
-For `<Generator>`, select a suitable CMake generator for your system (e.g. Xcode, Ninja, Unix Makefiles, etc.). For a complete list and further options see:
-Navigate to the root folder and compile:
-
-`cd ..; cmake --make build`
-
-Execute main for running the main program:
+## Execution of main program
+Execute main script for running the main program (`applications/main.cpp`):
 
 `./build/bin/main`
 
-Run tests:
-
-`./main_test`
+The terminal output should be:
+OIH   	5000
+SPY   	2000
+DRYS  	1209
+ZVZZT 	577
+AAPL  	495
+PTR   	400
+UYG   	400
+FXP   	320
+DIA   	229
+BAC   	210
 
 Additional executables can be created in the `/applications` folder. Please remember to then update the `/applications/CMakeLists.txt`
