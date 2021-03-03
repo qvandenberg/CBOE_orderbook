@@ -10,24 +10,27 @@
 /* Internal headers */
 #include "io/MarketDataReader.hpp"
 #include "recorder/RecorderManager.hpp"
+#include "recorder/InstrumentRanker.hpp"
 
 
 int main(int argc, char* argv[]) {
-  std::string fileName = "./data/pitch_example_data"; // Binary file name
+  std::string fileName = "./data/pitch_example_data";
 
   MarketDataReader * reader = new MarketDataReader(fileName);
   RecorderManager * recorder_manager = new RecorderManager();
+  InstrumentRanker* ranker = new InstrumentRanker();
 
+  /* Set objects dependencies */
+  reader->set_recorder_manager(recorder_manager);
+  ranker->set_recorder_manager(recorder_manager);
 
-
-  reader->set_recorder(recorder_manager);
-
-  printf("File size %ul bytes\n", reader->get_file_size());
+  /* Read data and print top 10 stocks */
   reader->read_file_to_recorder();
-  printf("Read in %ul of %ul bytes (%d \%)\n", reader->get_file_size()-reader->get_remaining_size(), reader->get_file_size(), (reader->get_file_size()-reader->get_remaining_size()) /reader->get_file_size());
+  ranker->print_top_stocks(10);
 
   /* Delete objects */
-  delete reader;
+  delete reader; // also deletes recorder_manager
+  delete ranker;
 
   return 0;
 }

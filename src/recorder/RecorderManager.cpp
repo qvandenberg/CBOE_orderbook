@@ -9,7 +9,6 @@
 #include "recorder/RecorderManager.hpp"
 
 RecorderManager::~RecorderManager(){
-  printf("Delete RecorderManager\n");
   // delete all instrument recorders
   for (auto& [id, ptr] : instrument_recorders) {
     ptr.reset();
@@ -43,4 +42,12 @@ void RecorderManager::receive_update(Trade& trade){
     instrument_recorders[trade.instrument] = std::make_unique<InstrumentRecorder>(trade.instrument);
   }
   instrument_recorders[trade.instrument]->add_trade(trade);
+}
+
+std::map<std::string, int> RecorderManager::get_instrument_volume_map(){
+  std::map<std::string, int> volume_map;
+  for (auto& [id, instr_recorder] : instrument_recorders){
+    volume_map[id] = instr_recorder->get_executed_volume();
+  }
+  return volume_map;
 }

@@ -6,7 +6,6 @@ Directory structure:
 
 `\applications - main programs`
 `\build/bin - executables`
-`\extern - external libraries (as header-only)`
 `\src - implementation (.cpp) and header (.hpp) files`
 `\test - testing scripts`
 
@@ -20,7 +19,7 @@ Execute cmake commands:
 
 `cmake .. -G <Generator>`
 
-For `<Generator>`, select a suitable CMake generator for your system (e.g. Xcode, Ninja, Unix Makefiles, etc.). For a complete list and further options see: 
+For `<Generator>`, select a suitable CMake generator for your system (e.g. Xcode, Ninja, Unix Makefiles, etc.). For a complete list and further options see:
 Navigate to the root folder and compile:
 
 `cd ..; cmake --make build`

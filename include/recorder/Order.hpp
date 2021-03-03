@@ -15,7 +15,7 @@ struct OrderCancel;
 
 class Order {
 private:
-  unsigned int remaining_quantity;
+  int remaining_quantity;
   // more attributes can be added to compute prices or other quantities
 
 public:

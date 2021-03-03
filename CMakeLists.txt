@@ -17,7 +17,7 @@ set(CMAKE_VERBOSE_MAKEFILE ON)
 set(CMAKE_BUILD_TYPE Debug)
 
 #set(CMAKE_C_COMPILER gcc)
-#set(CMAKE_CXX_COMPILER /usr/bin/c++)
+#set(CMAKE_CXX_COMPILER g++)
 
 ##############################################################################
 # Redirect /build directory output
@@ -28,12 +28,6 @@ set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
 ##############################################################################
-# External Dependencies
-##############################################################################
-# add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/extern/boost)
-# add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/extern/catch2)
-
-##############################################################################
 # Add sources
 ##############################################################################
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/src)
@@ -42,9 +36,3 @@ add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/src)
 # Compile application executables
 ##############################################################################
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/applications)
-
-##############################################################################
-# Compile tests
-##############################################################################
-# enable_testing()
-# add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/test)

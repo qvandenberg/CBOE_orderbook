@@ -26,6 +26,7 @@ public:
   void add_trade(Trade& trade);
   bool add_order_mutation(OrderExecuted& executed);
   bool add_order_mutation(OrderCancel& cancel);
+  int get_executed_volume();
 private:
   void delete_orderbook_entry(std::string);
 };
