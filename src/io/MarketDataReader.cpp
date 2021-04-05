@@ -14,7 +14,6 @@
 // #include "recorder/recorder_interface.hpp"
 
 
-
 MarketDataReader::MarketDataReader(std::string file_path) : market_data_file_path_(file_path) {
   bytes_read_ = 0;
   m_factory = new MessageFactory();

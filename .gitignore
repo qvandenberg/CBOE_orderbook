@@ -3,3 +3,6 @@
 *.xcodeproj/*
 *.gch
 build/*
+xcode/*
+Debug/*
+docs/email.md

@@ -14,7 +14,9 @@
 
 
 int main(int argc, char* argv[]) {
-  std::string fileName = "./data/pitch_example_data";
+    std::string fileName = "../../../data/pitch_example_data";
+//    std::string fileName = "./data/pitch_example_data";
+    printf("Input path is hardcoded to: %s\n", fileName.c_str());
 
   MarketDataReader * reader = new MarketDataReader(fileName);
   RecorderManager * recorder_manager = new RecorderManager();
@@ -34,3 +36,4 @@ int main(int argc, char* argv[]) {
 
   return 0;
 }
+
