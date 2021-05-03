@@ -4,12 +4,12 @@ This is an orderbook maintenance system that tracks incremental updates for an e
 The project is compiled with CMake and only makes use of the STL.
 
 ## Directory structure:
-
-`\applications - main programs`
-`\build/bin - executables`
-`\src - implementation (.cpp) files
-`\include` - header (.hpp) files`
-
+<ul>
+<li> `\applications - main programs`</li>
+<li>`\build/bin - executables`</li>
+<li>`\src - implementation (.cpp) files</li>
+<li>`\include` - header (.hpp) files`</li>
+</ul>
 ## Compilation procedure
 Modify the build.sh file to add the appropriate CMake generator. I chose "Unix Makefiles" as I work on OS X. On a Linux system, a Ninja generator is likely more suitable.
 
