@@ -18,7 +18,7 @@ Execute main script for running the main program (`applications/main.cpp`):
 
 `./build/bin/main`
 
-The terminal output should be:
+The terminal output should be:<br>
 OIH   	5000<br>
 SPY   	2000<br>
 DRYS  	1209<br>
