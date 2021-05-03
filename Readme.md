@@ -19,15 +19,15 @@ Execute main script for running the main program (`applications/main.cpp`):
 `./build/bin/main`
 
 The terminal output should be:
-OIH   	5000
-SPY   	2000
-DRYS  	1209
-ZVZZT 	577
-AAPL  	495
-PTR   	400
-UYG   	400
-FXP   	320
-DIA   	229
-BAC   	210
+OIH   	5000<br>
+SPY   	2000<br>
+DRYS  	1209<br>
+ZVZZT 	577<br>
+AAPL  	495<br>
+PTR   	400<br>
+UYG   	400<br>
+FXP   	320<br>
+DIA   	229<br>
+BAC   	210<br>
 
 Additional executables can be created in the `/applications` folder. Please remember to then update the `/applications/CMakeLists.txt`
